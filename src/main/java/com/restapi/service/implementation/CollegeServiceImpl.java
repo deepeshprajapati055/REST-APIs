@@ -1,6 +1,5 @@
 package com.restapi.service.implementation;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +45,6 @@ public class CollegeServiceImpl implements CollegeService{
 			return cl.get();
 		}
 	}
+	
 
 }
