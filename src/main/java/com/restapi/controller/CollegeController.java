@@ -3,6 +3,8 @@ package com.restapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +21,13 @@ public class CollegeController {
 	CollegeService collegeService;
 	
 	@PostMapping("/addColleges")
-	public College addCollege(@RequestBody College college) {
-		return collegeService.addCollegeDetials(college);
+	public ResponseEntity<?> addCollege(@RequestBody College college) {
+		College clg = collegeService.addCollegeDetials(college);
+		if(clg!=null) {
+			return ResponseEntity.status(HttpStatus.OK).body("college details saved Successfully");
+		}else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error occured while adding the details");
+		}
 	}
 	
 	@GetMapping("/showColleges")
